@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  mongo:
+      image: mongo:latest
+      container_name: mongodb
+      ports:
+        - "27017:27017"
+      volumes:
+        - mongo_data:/data/db
+
+  web:
+    image: ${DOCKER_REGISTRY-}web
+    build:
+      context: .
+      dockerfile: Web/Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+      - MongoDB__ConnectionString=mongodb://mongo:27017
+      - MongoDB__DatabaseName=DocumentDb
+ 
+volumes:
+  mongo_data:
