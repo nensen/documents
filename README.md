@@ -14,7 +14,7 @@
 
 1. Decided to go with classic onion architecture with rest web api
 
-2. Use Accept header for specifing response format when retrieving the document
+2. Use Accept header for specifing response format when retrieving the document. Currently supported formats: "application/xml", "application/x-msgpack", "application/json"
   
 3. Providing support for new formats will be as easy as creating new serializer in 'SerializationHelper' class and add use it in the controller.
 
